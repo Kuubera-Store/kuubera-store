@@ -98,25 +98,27 @@ You already have **Python** installed, so this is easy.
 
 ## 4. Put it on GitHub & turn on GitHub Pages
 
-> **Note:** `git` is **not installed** on this computer yet. Two easy options:
->
-> - **Easiest (no git needed):** upload the files through GitHub's website (Step 4B below).
-> - **Or install git** from <https://git-scm.com/download/win>, reopen your terminal,
->   then use the commands in Step 4A.
+> **Note:** Git is installed and this project is **already a git repository** with an
+> initial commit made for you. You just need to create the GitHub repo and push (Step 4A).
+> Prefer no command line at all? You can also upload the files through GitHub's website
+> (Step 4B).
 
-### Step 4A — Using git (after installing it)
+### Step 4A — Using git (recommended)
 
-Run these in this folder, one block at a time:
+The repo is already initialised and committed locally. To publish it:
 
-```powershell
-git init
-git add .
-git commit -m "Initial commit: Kuubera Store catalog"
-git branch -M main
-# Create an EMPTY repo on github.com first (no README), then paste its URL below:
-git remote add origin https://github.com/YOUR-USERNAME/kuubera-store.git
-git push -u origin main
-```
+1. Go to <https://github.com/new>, create an **empty** repo named **`kuubera-store`**
+   (Public, **don't** add a README/licence), and copy its URL.
+2. Open a terminal **in this folder** (Git Bash, or a *new* PowerShell window so git is
+   on the PATH) and run — replacing `YOUR-USERNAME`:
+
+   ```bash
+   git remote add origin https://github.com/YOUR-USERNAME/kuubera-store.git
+   git push -u origin main
+   ```
+
+> Already pushed once? For future changes just run:
+> `git add . && git commit -m "Update products" && git push`
 
 > Have the GitHub CLI? You can replace the last three lines with:
 > `gh repo create kuubera-store --public --source=. --push`
