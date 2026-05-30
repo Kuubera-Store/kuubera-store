@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "PowerShell(git --version; Write-Output \"exit: $LASTEXITCODE\")",
-      "PowerShell(Start-Process python -ArgumentList '-m','http.server','8000' -WindowStyle Hidden; Start-Sleep -Seconds 2; try { $r = Invoke-WebRequest -Uri 'http://localhost:8000/' -UseBasicParsing -TimeoutSec 5; Write-Output \\(\"Home page HTTP \" + $r.StatusCode\\) } catch { Write-Output \"ERR home: $_\" }; try { $j = Invoke-WebRequest -Uri 'http://localhost:8000/js/products.js' -UseBasicParsing -TimeoutSec 5; Write-Output \\(\"products.js HTTP \" + $j.StatusCode\\) } catch { Write-Output \"ERR products: $_\" }; try { $i = Invoke-WebRequest -Uri 'http://localhost:8000/images/logo.svg' -UseBasicParsing -TimeoutSec 5; Write-Output \\(\"logo.svg HTTP \" + $i.StatusCode + \" type \" + $i.Headers['Content-Type']\\) } catch { Write-Output \"ERR logo: $_\" })"
-    ]
-  }
-}

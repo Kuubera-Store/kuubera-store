@@ -6,3 +6,6 @@ Desktop.ini
 *.swp
 .vscode/
 .idea/
+
+# Claude Code local settings (not part of the website)
+.claude/
