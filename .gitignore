@@ -1,0 +1,8 @@
+# OS / editor junk we don't want in the GitHub repo
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+.vscode/
+.idea/
