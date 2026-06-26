@@ -1,9 +1,9 @@
 # 🛍️ Kuubera Store — Catalog Website
 
 A fast, elegant, **static** catalog website for a women's Indian ethnic-wear
-boutique. Customers browse sarees, kurtis and more, then **order on WhatsApp**.
-There is **no checkout, no database, and no admin panel** — you manage everything
-by editing one simple file on GitHub.com.
+boutique. Customers browse sarees, kurtis and more, then **order on WhatsApp**
+(or buy on **Amazon** if you add a link). There is **no checkout, no database,
+and no admin panel** — you manage everything by editing **one spreadsheet file**.
 
 Built with plain **HTML + CSS + JavaScript**. It runs for **free on GitHub Pages**
 with no build step.
@@ -13,15 +13,14 @@ with no build step.
 ## 📑 Table of contents
 
 1. [What's in this folder](#1-whats-in-this-folder)
-2. [⭐ Where to paste your WhatsApp number (do this first)](#2--where-to-paste-your-whatsapp-number-do-this-first)
+2. [⭐ Your WhatsApp number & Instagram (set once)](#2--your-whatsapp-number--instagram-set-once)
 3. [Preview the site on your computer](#3-preview-the-site-on-your-computer)
 4. [Put it on GitHub & turn on GitHub Pages](#4-put-it-on-github--turn-on-github-pages)
 5. [Connect your custom domain](#5-connect-your-custom-domain)
-6. [➕ How to ADD a product](#6--how-to-add-a-product)
-7. [✏️ How to EDIT a product](#7-️-how-to-edit-a-product)
-8. [🗑️ How to DELETE a product](#8-️-how-to-delete-a-product)
-9. [🖼️ How to upload your real photos](#9-️-how-to-upload-your-real-photos)
-10. [Tips & troubleshooting](#10-tips--troubleshooting)
+6. [🗂️ How to manage your products (the CSV)](#6-️-how-to-manage-your-products-the-csv)
+7. [🛒 Adding an Amazon "Buy" link](#7--adding-an-amazon-buy-link)
+8. [🖼️ How to upload your real photos](#8-️-how-to-upload-your-real-photos)
+9. [Tips & troubleshooting](#9-tips--troubleshooting)
 
 ---
 
@@ -30,50 +29,41 @@ with no build step.
 ```
 Kuubera Store Website/
 ├── index.html          ← the home page (you rarely touch this)
+├── products.csv        ← ⭐ YOUR SHOP — open in Excel/Sheets to manage products
 ├── 404.html            ← friendly "page not found" page
 ├── .nojekyll           ← tells GitHub Pages to serve files as-is (leave it)
 ├── css/
 │   └── styles.css      ← all the styling / colours
 ├── js/
-│   ├── products.js     ← ⭐ YOUR SHOP — edit THIS to manage products
+│   ├── products.js     ← your SETTINGS (WhatsApp number + Instagram) — set once
 │   └── app.js          ← the engine that draws the site (don't touch)
 ├── images/             ← all product photos + logo live here
-│   ├── logo.svg
-│   ├── saree-kanjivaram-1.svg   (placeholder — replace with real photos)
-│   └── ... more placeholders ...
+│   ├── logo.png        ← full logo (transparent background)
+│   ├── logo-mark.png   ← the round horse emblem (used in the header)
+│   └── ... your product photos ...
 └── README.md           ← this guide
 ```
 
 👉 **You will spend 99% of your time in just two places:**
-the file **`js/products.js`** and the **`images/`** folder.
+the file **`products.csv`** and the **`images/`** folder.
 
 ---
 
-## 2. ⭐ Where to paste your WhatsApp number (do this first)
+## 2. ⭐ Your WhatsApp number & Instagram (set once)
 
-Open **`js/products.js`**. Near the top you'll see:
-
-```js
-const WHATSAPP_NUMBER = "<your number>";
-```
-
-Replace `<your number>` with your real number in **country-code format**
-(no `+`, no spaces, no dashes). For your India number this is:
+Open **`js/products.js`**. Near the top you'll see your settings — already filled in:
 
 ```js
-const WHATSAPP_NUMBER = "918887805697";
+const WHATSAPP_NUMBER = "919082573485";              // 91 = India, then the 10-digit number
+const INSTAGRAM_URL   = "https://instagram.com/kuubera_store";
 ```
 
-> `91` is India's country code, followed by your 10-digit number `8887805697`.
+- **WhatsApp number** must be in country-code format with **no `+`, spaces or dashes**.
+  `+91 90825 73485` becomes `919082573485`.
+- Set your real **Instagram** URL too.
 
-While you're there, also set your Instagram link in the same file:
-
-```js
-const INSTAGRAM_URL = "https://instagram.com/your_handle";
-```
-
-That's the only setup needed. Every product's **"Order on WhatsApp"** button will
-now open a chat to you with the product name (and size) already typed in, e.g.:
+Every product's **"Order on WhatsApp"** button opens a chat to you with the product
+name (and size) already typed in, e.g.:
 
 > *Hi Kuubera Store, I'd like to order: Banarasi Silk Saree (Size: Free Size)*
 
@@ -91,26 +81,24 @@ You already have **Python** installed, so this is easy.
 3. Open your browser to **http://localhost:8000**
 4. Press **Ctrl + C** in the terminal to stop the preview when done.
 
-> ⚠️ Don't just double-click `index.html`. Open it through the address above so the
-> images and scripts load correctly.
+> ⚠️ Don't just double-click `index.html`. The product list is loaded from
+> `products.csv`, and browsers block that for double-clicked files. Always open it
+> through **http://localhost:8000** (locally) — on your live GitHub Pages site it
+> just works.
 
 ---
 
 ## 4. Put it on GitHub & turn on GitHub Pages
 
-> **Note:** Git is installed and this project is **already a git repository** with an
-> initial commit made for you. You just need to create the GitHub repo and push (Step 4A).
-> Prefer no command line at all? You can also upload the files through GitHub's website
-> (Step 4B).
+> **Note:** Git is installed and this project is **already a git repository**. You
+> just need to create the GitHub repo and push (Step 4A). Prefer no command line?
+> Upload the files through GitHub's website instead (Step 4B).
 
 ### Step 4A — Using git (recommended)
 
-The repo is already initialised and committed locally. To publish it:
-
 1. Go to <https://github.com/new>, create an **empty** repo named **`kuubera-store`**
    (Public, **don't** add a README/licence), and copy its URL.
-2. Open a terminal **in this folder** (Git Bash, or a *new* PowerShell window so git is
-   on the PATH) and run — replacing `YOUR-USERNAME`:
+2. Open a terminal **in this folder** and run — replacing `YOUR-USERNAME`:
 
    ```bash
    git remote add origin https://github.com/YOUR-USERNAME/kuubera-store.git
@@ -120,14 +108,11 @@ The repo is already initialised and committed locally. To publish it:
 > Already pushed once? For future changes just run:
 > `git add . && git commit -m "Update products" && git push`
 
-> Have the GitHub CLI? You can replace the last three lines with:
-> `gh repo create kuubera-store --public --source=. --push`
-
 ### Step 4B — Without git (upload through the website)
 
 1. Go to <https://github.com/new> and create a repository named **`kuubera-store`**
    (Public). Don't add a README.
-2. On the new repo page, click **“uploading an existing file”**.
+2. On the new repo page, click **"uploading an existing file"**.
 3. Drag **all the files and folders** from this folder into the browser and click
    **Commit changes**.
 
@@ -167,67 +152,82 @@ Log in to wherever you bought the domain (GoDaddy, Namecheap, etc.) and add:
 | A    | `@`         | `185.199.111.153` |
 
 3. DNS changes can take from a few minutes to a few hours.
-4. Back in **Settings → Pages**, tick **“Enforce HTTPS”** once it becomes available.
+4. Back in **Settings → Pages**, tick **"Enforce HTTPS"** once it becomes available.
 
 ---
 
-## 6. ➕ How to ADD a product
+## 6. 🗂️ How to manage your products (the CSV)
 
-You can do this entirely on **GitHub.com** (no software needed):
+All your products live in **`products.csv`**. A CSV is just a simple spreadsheet —
+open it in **Microsoft Excel** or **Google Sheets** (or even Notepad). **Each row is
+one product.** The first row is the column headings — don't rename or reorder them.
 
-1. **Upload the photo first** — see [Section 9](#9-️-how-to-upload-your-real-photos).
-2. In your repo open **`js/products.js`** and click the **pencil ✏️ (Edit)** icon.
-3. Find the product list. **Copy one whole block** — everything from `{` to `},` —
-   and paste it just below an existing one. Then change the values:
+### The columns
 
-   ```js
-   {
-     name: "Floral Georgette Saree",      // shown on card + popup
-     price: 3299,                          // numbers only, no symbol/commas
-     category: "Sarees",                   // "Sarees" or "Kurtis" (or a new one!)
-     sizes: ["Free Size"],                 // sarees: ["Free Size"]
-                                           // kurtis: ["S", "M", "L", "XL"]
-     description: "A breezy georgette saree with delicate floral prints.",
-     images: ["saree-floral-1.jpg"],       // filename(s) from the /images folder
-     inStock: true,                        // true = available, false = sold out
-   },
-   ```
+| Column        | What to put                                                                 | Example |
+|---------------|------------------------------------------------------------------------------|---------|
+| `name`        | Product name shown on the card & popup                                       | `Banarasi Silk Saree` |
+| `category`    | Used for the filter buttons. A new value makes a new filter button appear.   | `Sarees` |
+| `price`       | Numbers only — no symbol, no commas                                          | `6499` |
+| `sizes`       | Sizes separated by a **`|`** (pipe). See **size availability** below.        | `S\|M\|L\|XL` |
+| `description` | The full description shown in the popup                                      | `Handwoven Banarasi silk…` |
+| `images`      | Photo filename(s) from the `images/` folder, separated by **`|`**            | `saree-1.jpg\|saree-2.jpg` |
+| `amazon_url`  | (Optional) a link to buy on Amazon. Leave blank if you don't have one.       | `https://amzn.to/abc123` |
 
-4. Scroll down and click **Commit changes**. Your site updates in about a minute.
+### ⭐ Size availability (which sizes are in stock)
 
-> 💡 Adding a brand-new `category` (e.g. `"Lehengas"`) automatically creates a new
-> filter button — no other change needed.
+Each size can be **in stock or sold out individually** — e.g. `S` and `L` available
+but `M` sold out. You control this right inside the `sizes` column:
+
+- **Just list a size** → it's **available**: `S|M|L|XL`
+- **Add `:no` after a size** → that size is **sold out** (shown crossed-out, can't be ordered):
+  `S|M:no|L|XL`  ← here only **M** is sold out.
+- For sarees, use `Free Size` (or `Free Size:no` if that item is sold out).
+
+The card shows a **"Sold Out"** badge automatically only when **every** size is sold out.
+If at least one size is available, the product stays orderable (for the in-stock sizes).
+
+### To ADD a product
+Add a **new row** at the bottom and fill in the columns. Save the file.
+
+### To EDIT a product
+Change the cells in that product's row (e.g. update `price`, or mark a size sold out by
+adding `:no` to it in the `sizes` column). Save.
+
+### To DELETE a product
+Delete that whole **row**. Save.
+
+> **Editing on GitHub.com (no software):** open `products.csv` in your repo, click the
+> pencil ✏️ icon, edit the text, and **Commit changes**. Your site updates in ~1 minute.
+
+> 💡 **Important CSV rules**
+> - If your **description contains a comma**, wrap the whole description in
+>   **double quotes**: `"A breezy saree, perfect for summer."` (Excel/Sheets do this
+>   for you automatically when you save as CSV.)
+> - For **multiple sizes or multiple images**, separate them with a `|` (pipe),
+>   **not** a comma.
+> - Keep the header row exactly as it is.
 
 ---
 
-## 7. ✏️ How to EDIT a product
+## 7. 🛒 Adding an Amazon "Buy" link
 
-1. Open **`js/products.js`** on GitHub and click the **pencil ✏️** icon.
-2. Change the text between the quotes (e.g. update `price` or `description`).
-   To mark something sold out, set `inStock: false`.
-3. Click **Commit changes**.
+If you also sell a product on Amazon, paste the Amazon product link into the
+**`amazon_url`** column for that row. A **"Buy on Amazon"** button then appears in the
+product popup, next to the WhatsApp button.
 
----
-
-## 8. 🗑️ How to DELETE a product
-
-1. Open **`js/products.js`** and click the **pencil ✏️** icon.
-2. Delete the product's **entire block**, from its opening `{` down to its
-   closing `},` (including that comma).
-3. Click **Commit changes**.
+Leave the cell **blank** for products that aren't on Amazon — no button shows. You can
+fill these in any time later.
 
 ---
 
-## 9. 🖼️ How to upload your real photos
-
-The placeholder pictures (the maroon/indigo SVG cards) are there so the site looks
-complete offline. Replace them with your own photos:
+## 8. 🖼️ How to upload your real photos
 
 1. In your repo, click the **`images`** folder.
 2. Click **Add file → Upload files**, drag your photos in, then **Commit changes**.
-3. In **`js/products.js`**, set the product's `images` to your filename(s):
-   ```js
-   images: ["my-red-saree.jpg", "my-red-saree-back.jpg"],
+3. In **`products.csv`**, put the filename(s) in that product's **`images`** column:
+   ```
+   my-red-saree.jpg|my-red-saree-back.jpg
    ```
    The **first** image shows on the card; extra ones appear as thumbnails in the popup.
 
@@ -239,19 +239,21 @@ complete offline. Replace them with your own photos:
 
 ---
 
-## 10. Tips & troubleshooting
+## 9. Tips & troubleshooting
 
-- **A product disappeared / the page looks broken after editing.**
-  You probably removed a quote `"`, a comma `,`, or a bracket `}`. Open
-  `js/products.js`, check the block you last edited, and make sure it matches the
-  example exactly. GitHub keeps a history (Commits tab) so you can undo any change.
+- **The page says "Couldn't load the product list."** You probably double-clicked
+  `index.html`. Use the local server instead (see [Section 3](#3-preview-the-site-on-your-computer)).
+  On the live GitHub Pages site this never happens.
 
-- **An image shows blank.** The filename in `products.js` must match the file in
+- **A product looks broken or a column shifted.** A description with a comma wasn't
+  quoted. Open `products.csv`, wrap that description in `"double quotes"`, and save.
+  GitHub keeps a history (Commits tab) so you can undo any change.
+
+- **An image shows blank.** The filename in `products.csv` must match the file in
   `/images` **exactly**, including capital letters: `Saree.JPG` ≠ `saree.jpg`.
 
-- **WhatsApp button opens an empty/invalid chat.** You haven't replaced
-  `<your number>` in `js/products.js` (see [Section 2](#2--where-to-paste-your-whatsapp-number-do-this-first)),
-  or you added a `+`/spaces. It must look like `918887805697`.
+- **WhatsApp button opens an empty/invalid chat.** Check `WHATSAPP_NUMBER` in
+  `js/products.js` — it must look like `919082573485` (no `+`, spaces or dashes).
 
 - **Changes aren't showing on the live site.** Wait a minute, then do a hard refresh
   (**Ctrl + F5**). GitHub Pages can take ~1 minute to rebuild.

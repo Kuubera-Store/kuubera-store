@@ -68,8 +68,8 @@ a { color: inherit; text-decoration: none; }
   padding-bottom: 12px;
 }
 
-.logo { display: flex; align-items: center; gap: 12px; }
-.logo__mark { border-radius: 50%; box-shadow: 0 2px 8px rgba(123, 30, 43, 0.25); }
+.logo { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.logo__mark { width: 44px; height: 44px; object-fit: contain; flex-shrink: 0; }
 .logo__text { display: flex; flex-direction: column; line-height: 1; }
 .logo__name {
   font-family: var(--font-display);
@@ -109,6 +109,15 @@ a { color: inherit; text-decoration: none; }
   outline: none;
   border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(191, 161, 95, 0.18);
+}
+
+/* On narrow phones, drop the search box onto its own full-width row so it
+   can never crowd or overlap the logo while the page loads. */
+@media (max-width: 560px) {
+  .header__inner { flex-wrap: wrap; gap: 10px 14px; }
+  .logo { flex: 1 1 auto; }
+  .header__search { flex: 1 1 100%; order: 3; }
+  .logo__name { font-size: 1.3rem; }
 }
 
 /* =====================  HERO  ===================== */
@@ -313,7 +322,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 14px;
 }
-.footer__brand img { border-radius: 50%; margin: 0 auto 8px; }
+.footer__brand img { width: 68px; height: 68px; object-fit: contain; margin: 0 auto 8px; }
 .footer__name { font-family: var(--font-display); font-size: 1.4rem; margin: 0; color: var(--gold-soft); }
 .footer__line { margin: 4px 0 0; color: rgba(251,247,240,0.85); font-weight: 300; }
 .footer__links a {
@@ -423,26 +432,70 @@ a { color: inherit; text-decoration: none; }
 }
 .size-pill:hover { border-color: var(--gold); }
 .size-pill.is-active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+/* Sold-out size: shown but not selectable */
+.size-pill.is-unavailable {
+  color: var(--ink-soft);
+  background: var(--cream-2);
+  border-color: var(--line);
+  text-decoration: line-through;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.size-pill.is-unavailable:hover { border-color: var(--line); }
 
-/* WhatsApp order button */
-.btn-whatsapp {
+/* Buy buttons (WhatsApp + optional Amazon), stacked */
+.buy-actions { display: flex; flex-direction: column; gap: 12px; }
+.btn-whatsapp, .btn-amazon {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   width: 100%;
   padding: 15px 20px;
-  background: #25D366;
-  color: #06351b;
   font-size: 1.02rem;
   font-weight: 600;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(37,211,102,0.3);
   transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
 }
+.btn-whatsapp svg, .btn-amazon svg { flex-shrink: 0; }
+
+/* WhatsApp order button (primary) */
+.btn-whatsapp {
+  background: #25D366;
+  color: #06351b;
+  box-shadow: 0 8px 20px rgba(37,211,102,0.3);
+}
 .btn-whatsapp:hover { transform: translateY(-2px); background: #1ebe5a; box-shadow: 0 12px 26px rgba(37,211,102,0.4); }
-.btn-whatsapp svg { flex-shrink: 0; }
+
+/* Amazon buy button (secondary) */
+.btn-amazon {
+  background: #FF9900;
+  color: #1a1208;
+  box-shadow: 0 8px 20px rgba(255,153,0,0.28);
+}
+.btn-amazon:hover { transform: translateY(-2px); background: #f08a00; box-shadow: 0 12px 26px rgba(255,153,0,0.38); }
+
+/* Disabled order button when every size is sold out */
+.btn-whatsapp.is-disabled {
+  background: #c9c4bc;
+  color: #5f5a52;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.btn-whatsapp.is-disabled:hover { transform: none; background: #c9c4bc; box-shadow: none; }
+
 .modal__note { text-align: center; font-size: 0.8rem; color: var(--ink-soft); margin: 12px 0 0; }
+
+/* Loading / error message shown above the grid */
+.status-note {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.6;
+  padding: 40px 16px;
+  margin: 0;
+}
+.status-note strong { color: var(--maroon); }
 
 /* Respect users who prefer less motion */
 @media (prefers-reduced-motion: reduce) {
